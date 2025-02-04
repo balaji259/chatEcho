@@ -6,7 +6,7 @@ if (MONGO_URI) {
 
 }
 
-const dbConnect = async () => {
+const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) return;
 
     try {
@@ -18,4 +18,4 @@ const dbConnect = async () => {
     }
 }
 
-export default dbConnect;
+export default connectDB;
