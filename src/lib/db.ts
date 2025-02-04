@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
 const MONGO_URI = process.env.MONGO_URI!;
-if (MONGO_URI) {
-    throw new Error("Please enter the mongouri!");
+console.log(MONGO_URI);
+console.log(process.env.MONGO_URI);
 
+if (MONGO_URI) {
+    throw new Error("Please enter the Mongo URI!");
 }
 
 const connectDB = async () => {
