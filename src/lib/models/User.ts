@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    id: {
       type: String,
       required: true,
       unique: true,
+      trim: true,
+    },
+    name: {
+      type: String,
       trim: true,
     },
     email: {
@@ -17,9 +21,18 @@ const userSchema = new mongoose.Schema(
         "Please enter a valid RGUKT email address",
       ],
     },
+    gender: {
+      type: String,
+      trim: true,
+    },
+    branch: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
     password: {
       type: String,
-      required: true,
       default: "",
     },
   },
@@ -27,4 +40,3 @@ const userSchema = new mongoose.Schema(
 );
 
 export const User = mongoose.model("User", userSchema);
-module.exports = User;
