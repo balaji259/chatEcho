@@ -1,3 +1,4 @@
+import bcryptjs from "bcryptjs";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { User } from "@/lib/models/User";
@@ -11,7 +12,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    const correct = await user.comparePassword(password);
+    if (!user.password) {
+      return NextResponse.json(
+        { message: "Password not found" },
+        { status: 403 }
+      );
+    }
+
+    const correct = await bcryptjs.compare(password, user.password);
     if (!correct) {
       return NextResponse.json(
         { message: "Incorrect Password" },
