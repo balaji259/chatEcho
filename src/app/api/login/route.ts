@@ -6,27 +6,16 @@ import connectDB from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
 
-  
-    await connectDB(); 
-  
     const { email, password } = await request.json();
-    
-    
-    
-    
-    
+
     const user = await User.findOne({ email: email });
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-
-
-
-
-
-    if (!user.password || user.password.length==0) {
+    if (!user.password || user.password.length == 0) {
       console.log("set password");
       return NextResponse.json(
         { message: "Password not found" },
@@ -41,8 +30,6 @@ export async function POST(request: NextRequest) {
     //     { status: 401 }
     //   );
     // }
-
-
 
     return NextResponse.json({ message: "Login Successful" }, { status: 200 });
   } catch (err: any) {
