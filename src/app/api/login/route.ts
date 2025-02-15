@@ -1,5 +1,5 @@
-import bcryptjs from "bcryptjs";
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { User } from "@/lib/models/User";
 import connectDB from "@/lib/db";
