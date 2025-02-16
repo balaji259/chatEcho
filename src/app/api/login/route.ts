@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const correct = await password == user.password;
+    const correct = (await password) == user.password;
     if (!correct) {
       return NextResponse.json(
         { message: "Incorrect Password" },
@@ -34,8 +34,14 @@ export async function POST(request: NextRequest) {
 
     const token = jwt.sign(user, process.env.SECRET_KEY!, { expiresIn: "30d" });
 
-    const response = NextResponse.json({ message: "Login Successful", user }, { status: 200 });
-    response.cookies.set("token", token);
+    const response = NextResponse.json(
+      { message: "Login Successful", user },
+      { status: 200 }
+    );
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60,
+    });
 
     return response;
   } catch (err: any) {
