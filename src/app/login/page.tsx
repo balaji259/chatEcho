@@ -26,7 +26,12 @@ const LoginPage = () => {
       if (error.response?.status === 403) {
         toast.error("Please set password!");
         //send otp
-        router.push(`/set-password?email=${formData.email}`);
+        const res = await axios.post(`/api/sendotp`, {email: formData.email});
+        if(res.status == 200)
+        {
+          toast.error("Please set your password!");
+          router.push(`/set-password?email=${formData.email}`);
+        }
       } else if (error.response?.status === 404) {
         toast.error("User not found");
       } else {
