@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     if (!user.password || user.password.length == 0) {
       console.log("set password");
       return NextResponse.json(
-        { message: "Password not found" },
+        { message: "Password not found", email },
         { status: 403 }
       );
     }
