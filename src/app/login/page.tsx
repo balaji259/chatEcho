@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 "use client";
 
 import React, { useState } from "react";
@@ -25,7 +25,8 @@ const LoginPage = () => {
     } catch (error: any) {
       if (error.response?.status === 403) {
         toast.error("Please set password!");
-        router.push("/set-password");
+        //send otp
+        router.push(`/set-password?email=${formData.email}`);
       } else if (error.response?.status === 404) {
         toast.error("User not found");
       } else {

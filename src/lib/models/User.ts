@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema(
   {
     id: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
@@ -35,10 +34,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    changed: {
-      type: Boolean,
-      default: false,
-    },
+    // changed: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   { timestamps: true }
 );
