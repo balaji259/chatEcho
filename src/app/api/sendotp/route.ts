@@ -3,10 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 import { Otp } from '@/lib/models/Otp';
-import { User } from "@/lib/models/User";
 import connectDB from "@/lib/db";
 
-// Setup Nodemailer transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -17,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
     try {
-        await connectDB(); // Ensure database connection
+        await connectDB();
 
         const { email } = await request.json();
         if (!email) {
@@ -31,7 +29,7 @@ export async function POST(request: NextRequest) {
 
 
         await transporter.sendMail({
-            from: 'getsetotp@gmail.com', // Replace with your email
+            from: 'getsetotp@gmail.com',
             to: email,
             subject: 'Your OTP to set Password',
             text: `Your OTP is ${otp}. It will expire in 5 minutes.`,

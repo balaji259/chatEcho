@@ -8,6 +8,8 @@ import connectDB from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+    
     const body = await request.json();
     const { email, otp, password } = body;
 
